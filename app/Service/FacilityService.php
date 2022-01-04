@@ -9,11 +9,16 @@ class FacilityService
 {
     public function getFacilities($input)
     {
-        return Facility::all();
+        $result = Facility::all();
+        $result = FilterService::filterFacilityStatus($result);
+        return $result;
+
     }
     public function getFacility($input)
     {
-        return Facility::find($input);
+        $result = Facility::find($input);
+        //$result = FilterService::filterFacilityStatus($result,$input);
+        return $result;
     }
     public function addFacility($input)
     {

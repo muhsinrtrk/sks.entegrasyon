@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use \App\Http\Controllers\ReservationController;
 use \App\Http\Controllers\CommunityController;
 use \App\Http\Controllers\StudentController;
+use \App\Http\Controllers\FacilityController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,5 +32,8 @@ Route::group( ['prefix' => 'student','middleware' => ['auth:student-api','scopes
     Route::get('reservation-hour',[ReservationController::class, 'getReservationHour'])->name('getReservationHour');
     //Community Katılama işlemleri ve düzenleme
     Route::post('joincommunity',[CommunityController::class, 'joinCommunityByStudent'])->name('joinCommunityByStudent');
+    //getFacility
+    Route::get('facility',[FacilityController::class, 'getFacilities'])->name('getFacilities');
+    Route::get('facility/{id}',[FacilityController::class, 'getFacility'])->name('getFacility');
 
 });

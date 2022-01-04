@@ -4,6 +4,7 @@ namespace App\Service;
 
 
 use App\Models\AcademicalPersonal;
+use App\Models\Facility;
 use App\Models\SksAdmin;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,20 @@ class FilterService
             $result = $academicalPersonal->FacilityReservation;
             return $result;
         } else {
+            return $input;
+        }
+    }
+
+    public static function filterFacilityStatus($input,$id = null)
+    {
+        if (Auth::user() instanceof Student || Auth::user() instanceof AcademicalPersonal) {
+            if($id == null){
+                $input = Facility::where('status', 'LIKE', '%' . 1 . '%')->get();
+            }else{
+                $input = Facility::where([['status', 'LIKE', '%' . 1 . '%'],['id', 'LIKE', '%' . $id . '%']])->get();
+            }
+            return $input;
+        }else {
             return $input;
         }
     }

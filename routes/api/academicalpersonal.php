@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AcademicalPersonalController;
+use \App\Http\Controllers\FacilityController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,5 +35,8 @@ Route::group( ['prefix' => 'academicalpersonal','middleware' => ['auth:academica
     Route::get('reservation-hour',[ReservationController::class, 'getReservationHour'])->name('getReservationHour');
     //Logout
     Route::get('student/logout',[AuthController::class, 'studentLogout'])->name('studentLogout');
+    //getFacility
+    Route::get('facility',[FacilityController::class, 'getFacilities'])->name('getFacilities');
+    Route::get('facility/{id}',[FacilityController::class, 'getFacility'])->name('getFacility');
 
 });
