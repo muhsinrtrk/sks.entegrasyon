@@ -8,6 +8,7 @@ use \App\Http\Controllers\FacilityController;
 use App\Http\Controllers\AcademicalPersonalController;
 use \App\Http\Controllers\CommunityController;
 use \App\Http\Controllers\ReservationController;
+use \App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,9 @@ Route::group(['prefix' => 'sksadmin', 'middleware' => ['auth:sksadmin-api', 'sco
     Route::post('academical', [AcademicalPersonalController::class, 'addAcademicalPersonal'])->name('addAcademicalPersonal');
     Route::put('academical/{id}', [AcademicalPersonalController::class, 'setAcademicalPersonal'])->name('setAcademicalPersonal');
     Route::delete('academical/{id}', [AcademicalPersonalController::class, 'deleteAcademicalPersonal'])->name('deleteAcademicalPersonal');
+    //getStudent
+    Route::get('student', [StudentController::class, 'getStudents'])->name('getStudents');
+    Route::get('student/{id}', [StudentController::class, 'getStudent'])->name('getStudent');
     //Guesthouse
     /*Route::get('guesthouse', [GuesthouseController::class, 'getGuesthouses'])->name('getGuesthouses');
     Route::get('guesthouse/{id}', [GuesthouseController::class, 'getGuesthouse'])->name('getGuesthouse');

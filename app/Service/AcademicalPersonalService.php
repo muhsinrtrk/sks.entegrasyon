@@ -19,12 +19,6 @@ class AcademicalPersonalService
     public function getAcademicalPersonal($input)
     {
         $data = AcademicalPersonal::find($input);
-
-        if (!$data instanceof AcademicalPersonal) {
-            return response()->json([
-                'message' => $input . " id'li personal bulunamadı."
-            ], 404);
-        }
         return $data;
 
     }
