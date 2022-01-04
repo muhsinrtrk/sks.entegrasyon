@@ -34,7 +34,7 @@ Route::group( ['prefix' => 'academicalpersonal','middleware' => ['auth:academica
     //Hour
     Route::get('reservation-hour',[ReservationController::class, 'getReservationHour'])->name('getReservationHour');
     //Logout
-    Route::get('student/logout',[AuthController::class, 'studentLogout'])->name('studentLogout');
+    Route::get('logout',[AuthController::class, 'logout'])->name('logout');
     //getFacility
     Route::get('facility',[FacilityController::class, 'getFacilities'])->name('getFacilities');
     Route::get('facility/{id}',[FacilityController::class, 'getFacility'])->name('getFacility');

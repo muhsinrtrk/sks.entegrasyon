@@ -35,5 +35,6 @@ Route::group( ['prefix' => 'student','middleware' => ['auth:student-api','scopes
     //getFacility
     Route::get('facility',[FacilityController::class, 'getFacilities'])->name('getFacilities');
     Route::get('facility/{id}',[FacilityController::class, 'getFacility'])->name('getFacility');
-
+    //Logout
+    Route::get('logout',[AuthController::class, 'logout'])->name('logout');
 });

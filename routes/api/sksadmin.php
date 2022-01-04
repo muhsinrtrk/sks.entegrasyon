@@ -50,4 +50,6 @@ Route::group(['prefix' => 'sksadmin', 'middleware' => ['auth:sksadmin-api', 'sco
     Route::post('guesthouse', [GuesthouseController::class, 'addGuesthouse'])->name('addGuesthouse');
     Route::put('guesthouse/{id}', [GuesthouseController::class, 'setGuesthouse'])->name('setGuesthouse');
     Route::delete('guesthouse/{id}', [GuesthouseController::class, 'deleteGuesthouse'])->name('deleteGuesthouse');*/
+    //logout
+    Route::get('logout',[AuthController::class, 'logout'])->name('logout');
 });

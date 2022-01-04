@@ -20,4 +20,18 @@ class AuthController extends Controller
         $result = $authService->login($request);
         return $result;
     }
+    public function logout(Request $request){
+        $authService = new AuthService();
+        $result = $authService->logout($request);
+        if ($result == 1){
+            return response()->json([
+                'message' => 'Successfully logged out'
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Fail logged out'
+            ]);
+        }
+
+    }
 }

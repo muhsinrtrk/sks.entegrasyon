@@ -44,4 +44,8 @@ class AuthService
             return response()->json(['error' => ['Email and Password are Wrong.']], 404);
         }
     }
+    public function logout($input)
+    {
+        return $input->user()->token()->revoke();
+    }
 }
