@@ -33,6 +33,10 @@ class ReservationService
     {
         $dateType = $input->date . " " . $input->hour;
         $date = Carbon::createFromFormat('Y-m-d H:i',  $dateType);
+        $day = Carbon::createFromFormat('Y-m-d H:i',  $dateType)->format('l');
+        if ($day == 'Saturday' || $day == 'Sunday'){
+            return 'weekend';
+        }
         if (Auth::user() instanceof Student) {
             $data = [
                 'studentId' => Auth::user()->getAuthIdentifier(),

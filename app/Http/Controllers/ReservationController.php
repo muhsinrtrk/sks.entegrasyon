@@ -31,10 +31,14 @@ class ReservationController extends Controller
     {
         $facilityService = new ReservationService();
         $data = $facilityService->addFacilityReservation($request);
-        if ($data) {
+        if ($data == 1) {
             return response()->json([
                 'message' => 'Successfully add reservation!'
             ], 200);
+        }elseif ($data == 'weekend') {
+            return response()->json([
+                'message' => 'Hafta Sonu!'
+            ], 404);
         } else {
             return response()->json([
                 'message' => 'Failed to add reservation!'
