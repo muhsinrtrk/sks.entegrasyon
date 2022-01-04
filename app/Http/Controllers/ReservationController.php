@@ -19,7 +19,7 @@ class ReservationController extends Controller
     {
         $facilityService = new ReservationService();
         $data = $facilityService->getFacilityReservation($id);
-        if (!$data instanceof FacilityReservation) {
+        if (!$data instanceof FacilityReservation && $data == null) {
             return response()->json([
                 'message' => $id . " id'li rezervasyon bulunamadı."
             ], 404);

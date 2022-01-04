@@ -5,6 +5,7 @@ namespace App\Service;
 
 use App\Models\Facility;
 use App\Models\FacilityReservation;
+use App\Models\SksAdmin;
 use App\Models\Student;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -13,11 +14,20 @@ class ReservationService
 {
     public function getFacilityReservations($input)
     {
-        return FacilityReservation::all();
+        $result = FacilityReservation::all();
+        $result = FilterService::filterReservation($result);
+        return $result;
     }
     public function getFacilityReservation($input)
     {
-        return FacilityReservation::find($input);
+        $result = FacilityReservation::find($input);
+        $result = FilterService::filterReservation($result);
+        foreach ($result as $item){
+            if ($input == $item->id){
+                return $item;
+            }
+        }
+        return null;
     }
     public function addFacilityReservation($input)
     {
