@@ -3,6 +3,7 @@
 namespace App\Service;
 
 
+use App\Models\AcademicalPersonal;
 use App\Models\Facility;
 use App\Models\FacilityReservation;
 use App\Models\SksAdmin;
@@ -16,25 +17,34 @@ class ReservationService
     {
         $result = FacilityReservation::all();
         $result = FilterService::filterReservation($result);
+        foreach ($result as $key => $item) {
+            if ($item->studentId == null) {
+                $result->merge($item->AcademicalPersonal->get());
+            } else {
+                $result->merge($item->Student->get());
+            }
+        }
         return $result;
     }
+
     public function getFacilityReservation($input)
     {
         $result = FacilityReservation::find($input);
         $result = FilterService::filterReservation($result);
-        foreach ($result as $item){
-            if ($input == $item->id){
+        foreach ($result as $item) {
+            if ($input == $item->id) {
                 return $item;
             }
         }
         return null;
     }
+
     public function addFacilityReservation($input)
     {
         $dateType = $input->date . " " . $input->hour;
-        $date = Carbon::createFromFormat('Y-m-d H:i',  $dateType);
-        $day = Carbon::createFromFormat('Y-m-d H:i',  $dateType)->format('l');
-        if ($day == 'Saturday' || $day == 'Sunday'){
+        $date = Carbon::createFromFormat('Y-m-d H:i', $dateType);
+        $day = Carbon::createFromFormat('Y-m-d H:i', $dateType)->format('l');
+        if ($day == 'Saturday' || $day == 'Sunday') {
             return 'weekend';
         }
         if (Auth::user() instanceof Student) {
@@ -56,7 +66,8 @@ class ReservationService
         $result = $facilityReservation->save();
         return $result;
     }
-    public function setFacilityReservation($input,$id)
+
+    public function setFacilityReservation($input, $id)
     {
         $facilityReservation = FacilityReservation::find($id);
 
@@ -69,6 +80,7 @@ class ReservationService
         $result = $facilityReservation->save();
         return $result;
     }
+
     public function deleteReservation($input)
     {
         $facilityReservation = FacilityReservation::find($input);
@@ -87,7 +99,7 @@ class ReservationService
         $hours = [];
         foreach ($facilityReservation as $reservation) {
             $hour['hour'] = Carbon::parse($reservation->reservastionDate)->format('H:i');
-            array_push($hours,$hour);
+            array_push($hours, $hour);
         }
         return response()->json($hours, 200);
     }
