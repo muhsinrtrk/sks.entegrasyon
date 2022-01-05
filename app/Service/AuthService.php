@@ -7,7 +7,6 @@ use App\Models\AcademicalPersonal;
 use App\Models\SksAdmin;
 use App\Models\Student;
 use App\Models\SuperAdmin;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 
@@ -22,11 +21,7 @@ class AuthService
             'email' => $input->email,
             'password' => bcrypt($input->password)
         ]);
-        $user->save();
-
-        return response()->json([
-            'message' => 'Successfully created student!'
-        ], 201);
+        return $user->save();
     }
 
     public function login($input)
@@ -41,7 +36,7 @@ class AuthService
             $success['token'] = $user->createToken('MyApp', [$input->role])->accessToken;
             return $success;
         } else {
-            return response()->json(['error' => ['Email and Password are Wrong.']], 404);
+            return false;
         }
     }
     public function logout($input)

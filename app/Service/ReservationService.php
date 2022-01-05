@@ -101,6 +101,6 @@ class ReservationService
             $hour['hour'] = Carbon::parse($reservation->reservastionDate)->format('H:i');
             array_push($hours, $hour);
         }
-        return response()->json($hours, 200);
+        return $hours;
     }
 }

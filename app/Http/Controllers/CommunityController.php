@@ -12,7 +12,12 @@ class CommunityController extends Controller
     {
         $communityService = new CommunityService();
         $data = $communityService->getCommunities($request);
-        return response($data, 200);
+        return response()->json([
+            'status' => true,
+            'message' => '',
+            'errorCode' => '',
+            'data' => $data
+        ], 200);
     }
 
     public function getCommunity($id)
@@ -21,10 +26,18 @@ class CommunityController extends Controller
         $data = $communityService->getCommunity($id);
         if (!$data instanceof Community) {
             return response()->json([
-                'message' => $id . " id'li topluluk bulunamadı."
+                'status' => false,
+                'message' => $id . " id'li topluluk bulunamadı.",
+                'errorCode' => '',
+                'data' => ''
             ], 404);
         }
-        return response($data, 200);
+        return response()->json([
+            'status' => true,
+            'message' => '',
+            'errorCode' => '',
+            'data' => $data
+        ], 200);
     }
 
     public function addCommunity(Request $request)
@@ -33,11 +46,17 @@ class CommunityController extends Controller
         $data = $communityService->addCommunity($request);
         if ($data) {
             return response()->json([
-                'message' => 'Successfully add community!'
+                'status' => true,
+                'message' => 'Topluluk eklenedi.',
+                'errorCode' => '',
+                'data' => ''
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Failed to add community!'
+                'status' => false,
+                'message' => 'Topluluk eklenemedi.',
+                'errorCode' => '',
+                'data' => ''
             ], 500);
         }
     }
@@ -48,16 +67,25 @@ class CommunityController extends Controller
         $data = $communityService->setCommunity($request, $id);
         if ($data == 1) {
             return response()->json([
-                'message' => 'Successfully updated community!'
+                'status' => true,
+                'message' => $id . " id'li topluluk bulunamadı.",
+                'errorCode' => '',
+                'data' => ''
             ], 200);
         } elseif ($data == 0) {
             return response()->json([
-                'message' => 'Failed to update community!'
+                'status' => false,
+                'message' => $id . " id'li topluluk güncellenemedi.",
+                'errorCode' => '',
+                'data' => ''
             ], 500);
         }
         else{
             return response()->json([
-                'message' => $data
+                'status' => false,
+                'message' => $data,
+                'errorCode' => '',
+                'data' => ''
             ], 404);
         }
     }
@@ -68,16 +96,25 @@ class CommunityController extends Controller
         $data = $communityService->deleteCommunity($id);
         if ($data == 1) {
             return response()->json([
-                'message' => 'Successfully deleted community!'
+                'status' => true,
+                'message' => $id . " id'li topluluk silindi.",
+                'errorCode' => '',
+                'data' => ''
             ], 200);
         } elseif ($data == 0) {
             return response()->json([
-                'message' => 'Failed to delete community!'
+                'status' => false,
+                'message' => $id . " id'li topluluk güncellenemedi.",
+                'errorCode' => '',
+                'data' => ''
             ], 500);
         }
         else{
             return response()->json([
-                'message' => $data
+                'status' => false,
+                'message' => $data,
+                'errorCode' => '',
+                'data' => ''
             ], 404);
         }
     }
@@ -87,17 +124,26 @@ class CommunityController extends Controller
         $result = $communityService->joinStudentCommunity($request);
         if ($result == 1) {
             return response()->json([
-                'message' => 'Successfully join community!'
+                'status' => true,
+                'message' => 'Topluluğa katıldın.',
+                'errorCode' => '',
+                'data' => ''
             ], 200);
         } elseif ($result == 0) {
             return response()->json([
-                'message' => 'Failed to join community!'
+                'status' => true,
+                'message' => 'Topluluğa katılamadın.',
+                'errorCode' => '',
+                'data' => ''
             ], 500);
         }
         else{
             return response()->json([
-                'message' => $result
-            ], 404);
+                'status' => true,
+                'message' => $result,
+                'errorCode' => '',
+                'data' => ''
+            ], 500);
         }
     }
 }

@@ -18,23 +18,51 @@ class StudentController extends Controller
     {
         $authService = new AuthService();
         $result = $authService->studentSignUp($request);
-        return $result;
+        if ($result == 0) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Kayıt edilemedi.',
+                'errorCode' => '',
+                'data' => ''
+            ], 404);
+        }
+        return response()->json([
+            'status' => true,
+            'message' => 'Kayıt edildi.',
+            'errorCode' => '',
+            'data' => ''
+        ], 200);
     }
+
     public function getStudents(Request $request)
     {
         $student = new StudentService();
         $data = $student->getStudents($request);
-        return response($data, 200);
+        return response()->json([
+            'status' => true,
+            'message' => '',
+            'errorCode' => '',
+            'data' => $data
+        ], 200);
     }
+
     public function getStudent($id)
     {
         $student = new StudentService();
         $data = $student->getStudent($id);
         if (!$data instanceof Student) {
             return response()->json([
-                'message' => $id . " id'li öğrenci bulunamadı."
+                'status' => true,
+                'message' => $id . " id'li öğrenci bulunamadı.",
+                'errorCode' => '',
+                'data' => ''
             ], 404);
         }
-        return response($data, 200);
+        return response()->json([
+            'status' => true,
+            'message' => '',
+            'errorCode' => '',
+            'data' => $data
+        ], 200);
     }
 }

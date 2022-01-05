@@ -18,12 +18,6 @@ class SksAdminService
     public function getSksAdmin($input)
     {
         $data = SksAdmin::find($input);
-
-        if (!$data instanceof SksAdmin) {
-            return response()->json([
-                'message' => $input . " id'li sks admin bulunamadı."
-            ], 404);
-        }
         return $data;
 
     }
@@ -36,11 +30,7 @@ class SksAdminService
             'email' => $input->email,
             'password' => bcrypt($input->password)
         ]);
-        $user->save();
-
-        return response()->json([
-            'message' => 'Successfully created sks admin!'
-        ], 201);
+        return $user->save();
     }
 
     public function setSksAdmin($input, $id)

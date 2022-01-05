@@ -14,7 +14,12 @@ class FacilityController extends Controller
     {
         $facilityService = new FacilityService();
         $data = $facilityService->getFacilities($request);
-        return response($data, 200);
+        return response()->json([
+            'status' => true,
+            'message' => '',
+            'errorCode' => '',
+            'data' => $data
+        ], 200);
     }
 
     public function getFacility($id)
@@ -23,7 +28,10 @@ class FacilityController extends Controller
         $data = $facilityService->getFacility($id);
         if (!$data instanceof Facility) {
             return response()->json([
-                'message' => $id . " id'li tesis bulunamadı."
+                'status' => false,
+                'message' => $id . " id'li tesis bulunamadı.",
+                'errorCode' => '',
+                'data' => ''
             ], 404);
         }
         return response($data, 200);
@@ -35,12 +43,18 @@ class FacilityController extends Controller
         $data = $facilityService->addFacility($request);
         if ($data) {
             return response()->json([
-                'message' => 'Successfully add facility!'
+                'status' => true,
+                'message' => 'Tesis eklendi.',
+                'errorCode' => '',
+                'data' => ''
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Failed to add facility!'
-            ], 500);
+                'status' => false,
+                'message' => 'Tesis eklenemedi.',
+                'errorCode' => '',
+                'data' => ''
+            ], 200);
         }
     }
 
@@ -50,15 +64,24 @@ class FacilityController extends Controller
         $data = $facilityService->setFacility($request, $id);
         if ($data == 1) {
             return response()->json([
-                'message' => 'Successfully updated facility!'
+                'status' => true,
+                'message' => 'Tesis güncellendi.',
+                'errorCode' => '',
+                'data' => ''
             ], 200);
         } elseif ($data == 0) {
             return response()->json([
-                'message' => 'Failed to update facility!'
+                'status' => false,
+                'message' => 'Tesis güncellenemedi.',
+                'errorCode' => '',
+                'data' => ''
             ], 500);
         } else {
             return response()->json([
-                'message' => $data
+                'status' => false,
+                'message' => 'Tesis bulunamadı.',
+                'errorCode' => '',
+                'data' => ''
             ], 404);
         }
     }
@@ -69,15 +92,24 @@ class FacilityController extends Controller
         $data = $facilityService->deleteFacility($id);
         if ($data == 1) {
             return response()->json([
-                'message' => 'Successfully deleted facility!'
+                'status' => true,
+                'message' => 'Tesis silindi.',
+                'errorCode' => '',
+                'data' => ''
             ], 200);
         } elseif ($data == 0) {
             return response()->json([
-                'message' => 'Failed to delete facility!'
+                'status' => true,
+                'message' => 'Tesis silinemedi.',
+                'errorCode' => '',
+                'data' => ''
             ], 500);
         } else {
             return response()->json([
-                'message' => $data
+                'status' => false,
+                'message' => 'Tesis bulunamdı.',
+                'errorCode' => '',
+                'data' => ''
             ], 404);
         }
     }
