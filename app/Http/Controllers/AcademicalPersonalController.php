@@ -14,7 +14,12 @@ class AcademicalPersonalController extends Controller
     {
         $academicalPersonal = new AcademicalPersonalService();
         $data = $academicalPersonal->getAcademicalPersonals($request);
-        return response($data, 200);
+        return response()->json([
+            'status' => true,
+            'message' => '',
+            'errorCode' => '',
+            'data' => [$data]
+        ], 200);
     }
 
     public function getAcademicalPersonal($id)
@@ -23,10 +28,18 @@ class AcademicalPersonalController extends Controller
         $data = $academicalPersonal->getAcademicalPersonal($id);
         if (!$data instanceof AcademicalPersonal) {
             return response()->json([
-                'message' => $id . " id'li personal bulunamadı."
-            ], 404);
+                'status' => true,
+                'message' => $id . " id'li personal bulunamadı.",
+                'errorCode' => '',
+                'data' => []
+            ], 200);
         }
-        return response($data, 200);
+        return response()->json([
+            'status' => false,
+            'message' => '',
+            'errorCode' => '',
+            'data' => [$data]
+        ], 200);
     }
 
     public function addAcademicalPersonal(Request $request)
@@ -35,11 +48,17 @@ class AcademicalPersonalController extends Controller
         $data = $academicalPersonal->addAcademicalPersonal($request);
         if ($data) {
             return response()->json([
-                'message' => 'Successfully add personal!'
+                'status' => true,
+                'message' => 'Personel eklendi.',
+                'errorCode' => '',
+                'data' => []
             ], 200);
         } else {
             return response()->json([
-                'message' => 'Failed to add personal!'
+                'status' => false,
+                'message' => 'Personel eklenemedi.',
+                'errorCode' => '',
+                'data' => []
             ], 500);
         }
     }
@@ -50,15 +69,24 @@ class AcademicalPersonalController extends Controller
         $data = $academicalPersonal->setAcademicalPersonal($request, $id);
         if ($data == 1) {
             return response()->json([
-                'message' => 'Successfully updated personal!'
+                'status' => true,
+                'message' => 'Personel güncellendi.',
+                'errorCode' => '',
+                'data' => []
             ], 200);
         } elseif ($data == 0) {
             return response()->json([
-                'message' => 'Failed to update personal!'
+                'status' => false,
+                'message' => 'Personel güncellenemedi.',
+                'errorCode' => '',
+                'data' => []
             ], 500);
         } else {
             return response()->json([
-                'message' => $data
+                'status' => false,
+                'message' => $data,
+                'errorCode' => '',
+                'data' => []
             ], 404);
         }
     }
@@ -69,15 +97,24 @@ class AcademicalPersonalController extends Controller
         $data = $academicalPersonal->deleteAcademicalPersonal($id);
         if ($data == 1) {
             return response()->json([
-                'message' => 'Successfully deleted personal!'
+                'status' => true,
+                'message' => 'Personel silindi.',
+                'errorCode' => '',
+                'data' => []
             ], 200);
         } elseif ($data == 0) {
             return response()->json([
-                'message' => 'Failed to delete personal!'
+                'status' => true,
+                'message' => 'Personel silinemedi.',
+                'errorCode' => '',
+                'data' => []
             ], 500);
         } else {
             return response()->json([
-                'message' => $data
+                'status' => true,
+                'message' => $data,
+                'errorCode' => '',
+                'data' => []
             ], 404);
         }
     }

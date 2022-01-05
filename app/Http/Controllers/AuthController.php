@@ -18,19 +18,30 @@ class AuthController extends Controller
     {
         $authService = new AuthService();
         $result = $authService->login($request);
-        return $result;
+        return response()->json([
+            'status' => true,
+            'message' => '',
+            'errorCode' => '',
+            'data' => [$result]
+        ], 200);
     }
     public function logout(Request $request){
         $authService = new AuthService();
         $result = $authService->logout($request);
         if ($result == 1){
             return response()->json([
-                'message' => 'Successfully logged out'
-            ]);
+                'status' => true,
+                'message' => 'Çıkış yapıldı.',
+                'errorCode' => '',
+                'data' => []
+            ], 200);
         }else{
             return response()->json([
-                'message' => 'Fail logged out'
-            ]);
+                'status' => false,
+                'message' => 'Çıkış yapılamadı.',
+                'errorCode' => '',
+                'data' => []
+            ], 500);
         }
 
     }

@@ -39,7 +39,7 @@ class AuthService
             $user = Auth::guard($input->role)->user();
             $success = $user;
             $success['token'] = $user->createToken('MyApp', [$input->role])->accessToken;
-            return response()->json($success, 200);
+            return $success;
         } else {
             return response()->json(['error' => ['Email and Password are Wrong.']], 404);
         }

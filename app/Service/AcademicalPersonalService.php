@@ -20,7 +20,6 @@ class AcademicalPersonalService
     {
         $data = AcademicalPersonal::find($input);
         return $data;
-
     }
 
     public function addAcademicalPersonal($input)
@@ -31,11 +30,8 @@ class AcademicalPersonalService
             'email' => $input->email,
             'password' => bcrypt($input->password)
         ]);
-        $user->save();
-
-        return response()->json([
-            'message' => 'Successfully created sks admin!'
-        ], 201);
+        $result = $user->save();
+        return $result;
     }
 
     public function setAcademicalPersonal($input, $id)
@@ -61,7 +57,6 @@ class AcademicalPersonalService
         if (!$user instanceof AcademicalPersonal) {
             return $input . " id'li personal bulunamadı.";
         }
-
         $result = $user->delete();
         return $result;
     }
