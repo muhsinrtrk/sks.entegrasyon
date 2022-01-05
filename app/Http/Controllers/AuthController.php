@@ -18,12 +18,15 @@ class AuthController extends Controller
     {
         $authService = new AuthService();
         $result = $authService->login($request);
-        return response()->json([
+        $data = [
             'status' => true,
-            'message' => '',
+            'message' => 'Giriş yapıldı.',
             'errorCode' => '',
-            'data' => [$result]
-        ], 200);
+            'data' => $result->toArray()
+        ];
+
+        $response = response()->json($data,200);
+        return $response;
     }
     public function logout(Request $request){
         $authService = new AuthService();
