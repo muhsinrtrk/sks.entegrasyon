@@ -95,11 +95,16 @@ class ReservationService
 
     public function getReservationHour($input)
     {
-        $facilityReservation = FacilityReservation::where('facilityId', 'LIKE', '%' . $input->facilityId . '%')->get();
         $hours = [];
-        foreach ($facilityReservation as $reservation) {
-            $hour['hour'] = Carbon::parse($reservation->reservastionDate)->format('H:i');
-            array_push($hours, $hour);
+        $facilityReservation = FacilityReservation::where('facilityId', 'LIKE', '%' . $input->facilityId . '%')->get();
+        foreach ($facilityReservation as $key => $item) {
+            $day = Carbon::parse($item->reservastionDate)->format('Y-m-d');
+            $reservationDate = Carbon::create($day);
+            $inputDate = Carbon::create($input->date);
+            if ($reservationDate->eq($inputDate)) {
+                $hour['hour'] = Carbon::parse($item->reservastionDate)->format('H:i');
+                array_push($hours, $hour);
+            }
         }
         return $hours;
     }

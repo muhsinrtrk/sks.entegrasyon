@@ -28,7 +28,7 @@ Route::group( ['prefix' => 'student','middleware' => ['auth:student-api','scopes
     Route::put('reservation/{id}',[ReservationController::class, 'setReservation'])->name('setReservation');
     Route::delete('reservation/{id}',[ReservationController::class, 'deleteReservation'])->name('deleteReservation');
     //Hour
-    Route::get('reservation-hour',[ReservationController::class, 'getReservationHour'])->name('getReservationHour');
+    Route::post('reservation-hour',[ReservationController::class, 'getReservationHour'])->name('getReservationHour');
     //Community Katılama işlemleri ve düzenleme
     Route::post('joincommunity',[CommunityController::class, 'joinCommunityByStudent'])->name('joinCommunityByStudent');
     Route::get('getcommunity',[CommunityController::class, 'getCommunities'])->name('getCommunities');
