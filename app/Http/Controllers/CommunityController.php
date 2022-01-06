@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Community;
 use App\Service\CommunityService;
+use App\Service\FilterService;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
@@ -12,6 +13,8 @@ class CommunityController extends Controller
     {
         $communityService = new CommunityService();
         $data = $communityService->getCommunities($request);
+        $data = FilterService::filterCommunity($data);
+        json_encode($data);
         return response()->json([
             'status' => true,
             'message' => '',

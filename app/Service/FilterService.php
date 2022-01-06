@@ -22,24 +22,36 @@ class FilterService
             $result = $academicalPersonal->FacilityReservation;
             return $result;
         } else {
-            foreach ($input as $key => $item){
+            foreach ($input as $key => $item) {
                 $input->merge($item->Facility->get());
             }
             return $input;
         }
     }
 
-    public static function filterFacilityStatus($input,$id = null)
+    public static function filterFacilityStatus($input, $id = null)
     {
         if (Auth::user() instanceof Student || Auth::user() instanceof AcademicalPersonal) {
-            if($id == null){
+            if ($id == null) {
                 $input = Facility::where('status', 'LIKE', '%' . 1 . '%')->get();
-            }else{
-                $input = Facility::where([['status', 'LIKE', '%' . 1 . '%'],['id', 'LIKE', '%' . $id . '%']])->get();
+            } else {
+                $input = Facility::where([['status', 'LIKE', '%' . 1 . '%'], ['id', 'LIKE', '%' . $id . '%']])->get();
             }
             return $input;
-        }else {
+        } else {
             return $input;
         }
+    }
+
+    public static function filterCommunity($input)
+    {
+        foreach ($input as $key => $item) {
+            $student = Student::find($item->presidentStudentId);
+            $academicalPersonal = AcademicalPersonal::find($item->academicalPersonalId);
+            $data[$key] = $input[$key]->toArray();
+            $data[$key]['student'] = $student->toArray();
+            $data[$key]['academical_personal'] = $academicalPersonal->toArray();
+        }
+        return $data;
     }
 }
