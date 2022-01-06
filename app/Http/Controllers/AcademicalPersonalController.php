@@ -59,7 +59,7 @@ class AcademicalPersonalController extends Controller
                 'message' => 'Personel eklenemedi.',
                 'errorCode' => '',
                 'data' => []
-            ], 500);
+            ], 200);
         }
     }
 
@@ -80,7 +80,7 @@ class AcademicalPersonalController extends Controller
                 'message' => 'Personel güncellenemedi.',
                 'errorCode' => '',
                 'data' => []
-            ], 500);
+            ], 200);
         } else {
             return response()->json([
                 'status' => false,
@@ -108,7 +108,7 @@ class AcademicalPersonalController extends Controller
                 'message' => 'Personel silinemedi.',
                 'errorCode' => '',
                 'data' => []
-            ], 500);
+            ], 200);
         } else {
             return response()->json([
                 'status' => true,

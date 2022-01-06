@@ -49,7 +49,7 @@ class AuthController extends Controller
                 'message' => 'Çıkış yapılamadı.',
                 'errorCode' => '',
                 'data' => []
-            ], 500);
+            ], 200);
         }
 
     }

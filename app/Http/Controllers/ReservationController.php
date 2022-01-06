@@ -57,14 +57,14 @@ class ReservationController extends Controller
                 'message' => 'Hafta sonu rezervasyon yapılamaz.',
                 'errorCode' => '',
                 'data' => []
-            ], 404);
+            ], 200);
         } else {
             return response()->json([
                 'status' => false,
                 'message' => 'Bilinmeyen hata.',
                 'errorCode' => '',
                 'data' => []
-            ], 500);
+            ], 200);
         }
     }
 

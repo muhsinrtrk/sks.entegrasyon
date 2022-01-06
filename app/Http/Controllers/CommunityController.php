@@ -57,7 +57,7 @@ class CommunityController extends Controller
                 'message' => 'Topluluk eklenemedi.',
                 'errorCode' => '',
                 'data' => ''
-            ], 500);
+            ], 200);
         }
     }
 
@@ -78,7 +78,7 @@ class CommunityController extends Controller
                 'message' => $id . " id'li topluluk güncellenemedi.",
                 'errorCode' => '',
                 'data' => ''
-            ], 500);
+            ], 200);
         }
         else{
             return response()->json([
@@ -107,7 +107,7 @@ class CommunityController extends Controller
                 'message' => $id . " id'li topluluk güncellenemedi.",
                 'errorCode' => '',
                 'data' => ''
-            ], 500);
+            ], 200);
         }
         else{
             return response()->json([
@@ -135,7 +135,7 @@ class CommunityController extends Controller
                 'message' => 'Topluluğa katılamadın.',
                 'errorCode' => '',
                 'data' => ''
-            ], 500);
+            ], 200);
         }
         else{
             return response()->json([
@@ -143,7 +143,7 @@ class CommunityController extends Controller
                 'message' => $result,
                 'errorCode' => '',
                 'data' => ''
-            ], 500);
+            ], 404);
         }
     }
 }

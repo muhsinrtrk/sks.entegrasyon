@@ -58,7 +58,7 @@ class SksAdminController extends Controller
                 'message' => 'Sks Admini eklenemedi',
                 'errorCode' => '',
                 'data' => ''
-            ],500);
+            ],200);
         }
     }
 
@@ -79,7 +79,7 @@ class SksAdminController extends Controller
                 'message' => 'Sks Admini güncellenemedi.',
                 'errorCode' => '',
                 'data' => ''
-            ],500);
+            ],200);
         }
         else{
             return response()->json([
@@ -108,7 +108,7 @@ class SksAdminController extends Controller
                 'message' => 'Sks admini silinemedi.',
                 'errorCode' => '',
                 'data' => ''
-            ],500);
+            ],200);
         }
         else{
             return response()->json([

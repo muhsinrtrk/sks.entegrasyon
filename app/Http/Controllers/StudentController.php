@@ -24,7 +24,7 @@ class StudentController extends Controller
                 'message' => 'Kayıt edilemedi.',
                 'errorCode' => '',
                 'data' => ''
-            ], 404);
+            ], 200);
         }
         return response()->json([
             'status' => true,

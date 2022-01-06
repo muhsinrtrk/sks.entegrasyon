@@ -34,7 +34,12 @@ class FacilityController extends Controller
                 'data' => ''
             ], 404);
         }
-        return response($data, 200);
+        return response()->json([
+            'status' => true,
+            'message' => '',
+            'errorCode' => '',
+            'data' => $data
+        ], 200);
     }
 
     public function addFacility(Request $request)
@@ -75,7 +80,7 @@ class FacilityController extends Controller
                 'message' => 'Tesis güncellenemedi.',
                 'errorCode' => '',
                 'data' => ''
-            ], 500);
+            ], 200);
         } else {
             return response()->json([
                 'status' => false,
@@ -103,7 +108,7 @@ class FacilityController extends Controller
                 'message' => 'Tesis silinemedi.',
                 'errorCode' => '',
                 'data' => ''
-            ], 500);
+            ], 200);
         } else {
             return response()->json([
                 'status' => false,
