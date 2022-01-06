@@ -32,7 +32,7 @@ Route::group(['prefix' => 'sksadmin', 'middleware' => ['auth:sksadmin-api', 'sco
     //Reservation
     Route::get('reservation',[ReservationController::class, 'getReservations'])->name('getReservations');
     Route::get('reservation/{id}',[ReservationController::class, 'getReservation'])->name('getReservation');
-    Route::delete('reservation',[ReservationController::class, 'deleteReservation'])->name('deleteReservation');
+    Route::delete('reservation/{id}',[ReservationController::class, 'deleteReservation'])->name('deleteReservation');
     //Facility
     Route::get('facility', [FacilityController::class, 'getFacilities'])->name('getFacilities');
     Route::get('facility/{id}', [FacilityController::class, 'getFacility'])->name('getFacility');
