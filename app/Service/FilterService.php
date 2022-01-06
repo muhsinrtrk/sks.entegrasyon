@@ -22,6 +22,9 @@ class FilterService
             $result = $academicalPersonal->FacilityReservation;
             return $result;
         } else {
+            foreach ($input as $key => $item){
+                $input->merge($item->Facility->get());
+            }
             return $input;
         }
     }
