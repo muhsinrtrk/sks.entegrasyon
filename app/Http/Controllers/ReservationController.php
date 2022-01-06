@@ -16,7 +16,7 @@ class ReservationController extends Controller
             'status' => true,
             'message' => '',
             'errorCode' => '',
-            'data' => [$data]
+            'data' => $data
         ], 200);
     }
 
@@ -36,7 +36,7 @@ class ReservationController extends Controller
             'status' => false,
             'message' => '',
             'errorCode' => '',
-            'data' => [$data]
+            'data' => $data
         ], 200);
     }
 
@@ -132,7 +132,7 @@ class ReservationController extends Controller
             'status' => true,
             'message' => '',
             'errorCode' => '',
-            'data' => [$result]
+            'data' => $result
         ], 200);
     }
 }
