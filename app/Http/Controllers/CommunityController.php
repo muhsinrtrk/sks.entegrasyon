@@ -47,7 +47,7 @@ class CommunityController extends Controller
         if ($data) {
             return response()->json([
                 'status' => true,
-                'message' => 'Topluluk eklenedi.',
+                'message' => 'Topluluk eklendi.',
                 'errorCode' => '',
                 'data' => ''
             ], 200);
@@ -68,7 +68,7 @@ class CommunityController extends Controller
         if ($data == 1) {
             return response()->json([
                 'status' => true,
-                'message' => $id . " id'li topluluk bulunamadı.",
+                'message' => $id . " id'li topluluk güncellendi.",
                 'errorCode' => '',
                 'data' => ''
             ], 200);
