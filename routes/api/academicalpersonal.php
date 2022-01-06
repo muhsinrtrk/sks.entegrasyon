@@ -32,7 +32,7 @@ Route::group( ['prefix' => 'academicalpersonal','middleware' => ['auth:academica
     Route::put('reservation/{id}',[ReservationController::class, 'setReservation'])->name('setReservation');
     Route::delete('reservation/{id}',[ReservationController::class, 'deleteReservation'])->name('deleteReservation');
     //Hour
-    Route::get('reservation-hour',[ReservationController::class, 'getReservationHour'])->name('getReservationHour');
+    Route::post('reservation-hour',[ReservationController::class, 'getReservationHour'])->name('getReservationHour');
     //Logout
     Route::get('logout',[AuthController::class, 'logout'])->name('logout');
     //getFacility
